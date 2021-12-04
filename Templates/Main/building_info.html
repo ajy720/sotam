@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static "building_info.css" %}">
+    {% include 'header.html' with title=building.spell title2="관" to='main:building_list' %}
+    <div class="building-info-page">
+        <div class="building-header">
+            <h2>{{ building.name }}({{ building.spell }}관)</h2>
+            <div class="star">
+
+                {% if star != -1 %}
+                    <span class="color-primary">★</span>{ stars }}
+                {% else %}
+                    별점 정보가 없습니다.
+
+                {% endif %}
+            </div>
+            <div class="time">
+                {% if open_time == '' %}
+                    {{ building.open_time }} ~ {{ building.close_time }}
+                {% else %}
+                    시간 정보가 없습니다.
+
+                {% endif %}
+            </div>
+            <div class="tags">
+                {% if tags %}
+                    {% for tag in tags %}
+                        <div class="tag">#{{ tag }}</div>
+                    {% endfor %}
+                {% else %}
+                    태그가 없습니다.
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

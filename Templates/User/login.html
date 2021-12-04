@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <script>
+        window.onload = () => {
+            var loginBtn = document.querySelector(".login-btn");
+            var username = document.querySelector("input[name='username']");
+            var password = document.querySelector("input[name='password']");
+
+            loginBtn.addEventListener("click", () => {
+                console.log(username.value, password.value)
+
+                $.post(
+                    '{% url 'user:login' %}', {
+                        "username": username.value,
+                        "password": password.value,
+                    }
+                )
+            })
+
+
+            const onClick = (e) => {
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <div class="login-page">
+        <form action="{% url 'user:login' %}" method="post" class="post-form">
+            {% csrf_token %}
+            <div class="loginContainer">
+                <div>이메일</div>
+                <input type="text" placeholder="이메일을 입력해주세요." name="username" autocomplete="off">
+            </div>
+            <div class="loginContainer">
+                <div>비밀번호</div>
+                <input type="password" placeholder="비밀번호를 입력해주세요." name="password" autocomplete="off">
+            </div>
+
+            {% include "form_errors.html" %}
+
+            <button class="login-btn">로그인</button>
+            <a class="signup-btn" href="{% url "user:signup" %}">회원가입</a>
+        </form>
+    </div>
+{% endblock %}

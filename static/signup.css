@@ -1,0 +1,56 @@
+.signup-page {
+    padding: 0 20px;
+}
+
+h2{
+    margin-bottom: 8px;
+}
+
+.loginContainer {
+    margin-bottom: 20px;
+}
+
+.post-form p input{
+    background-color: transparent;
+
+}
+
+.loginContainer input {
+
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 14px;
+    width: 325px;
+    height: 52px;
+    background-color: transparent;
+    padding: 10px 15px;
+    outline: none;
+}
+
+.loginContainer div{
+    margin-bottom: 8px;
+}
+
+.submit-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 20px;
+
+    width: 325px;
+    height: 51px;
+
+    background-color: #fa4545;
+    border-radius: 14px;
+
+    font-size: 20px;
+
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.fail-label{
+    color: white;
+    margin-bottom: 20px;
+}

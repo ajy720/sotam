@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static "building_list.css" %}">
+    <div class="building-list-page">
+        <label for="search">
+            <div class="background"></div>
+            <div class="searchContainer">
+                <div class="container">
+                    <input id="search" type="text" placeholder="검색어를 입력하세요." autocomplete="off">
+                    <i>
+                        <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.3389 20.8184L15.6572 14.0938C16.9893 12.5039 17.6553 10.6706 17.6553 8.59375C17.6553 7.03255 17.2721 5.5931 16.5059 4.27539C15.7396 2.95768 14.694 1.91569 13.3691 1.14941C12.0443 0.383138 10.6048 0 9.05078 0C7.49674 0 6.06087 0.383138 4.74316 1.14941C3.42546 1.91569 2.38346 2.95768 1.61719 4.27539C0.850911 5.5931 0.467773 7.03255 0.467773 8.59375C0.467773 10.1549 0.850911 11.5944 1.61719 12.9121C2.38346 14.2298 3.42546 15.2718 4.74316 16.0381C6.06087 16.8044 7.50033 17.1875 9.06152 17.1875C11.1956 17.1875 13.0719 16.4857 14.6904 15.082L21.3506 21.7852C21.4938 21.9284 21.6585 22 21.8447 22C22.0309 22 22.1921 21.932 22.3281 21.7959C22.4642 21.6598 22.5322 21.4951 22.5322 21.3018C22.5322 21.1084 22.4678 20.9473 22.3389 20.8184ZM9.06152 15.834C7.74381 15.834 6.52995 15.5081 5.41992 14.8564C4.3099 14.2048 3.43262 13.3239 2.78809 12.2139C2.14355 11.1038 1.82129 9.89714 1.82129 8.59375C1.82129 7.29036 2.14355 6.08366 2.78809 4.97363C3.43262 3.86361 4.3099 2.98275 5.41992 2.33105C6.52995 1.67936 7.74023 1.35352 9.05078 1.35352C10.3613 1.35352 11.5716 1.67936 12.6816 2.33105C13.7917 2.98275 14.6689 3.86361 15.3135 4.97363C15.958 6.08366 16.2803 7.29036 16.2803 8.59375C16.2803 9.15234 16.2158 9.70378 16.0869 10.248C15.958 10.7923 15.7754 11.3008 15.5391 11.7734C15.3027 12.2461 15.0199 12.6937 14.6904 13.1162C14.361 13.5387 13.9886 13.9147 13.5732 14.2441C13.1579 14.5736 12.7139 14.8564 12.2412 15.0928C11.7686 15.3291 11.2601 15.5117 10.7158 15.6406C10.1715 15.7695 9.62012 15.834 9.06152 15.834Z"
+                                  fill="#CACACC"/>
+                        </svg>
+                    </i>
+                </div>
+            </div>
+        </label>
+        <div class="building-list">
+            {% if buildings %}
+                {% for building in buildings %}
+                    <a class="building-item item" href="{% url 'main:building_info' building.id %}">
+                        <div class="container">
+                            <div class="spell">
+                                {{ building.spell }}
+                            </div>
+                            <div class="main">
+                                <div class="name">
+                                    {{ building.name }}
+                                </div>
+                                {% if building.status %}
+                                    <div class="time">
+                                        <div class="time">
+                                            {{ building.open_time }} ~ {{ building.close_time }}
+                                        </div>
+                                        <div class="status {{ building.status }}"></div>
+                                    </div>
+                                {% else %}
+                                    <div class="time">
+                                        <div class="time">
+                                            시간 정보 없음
+                                        </div>
+                                        <div class="status"></div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                            <div class="chevron">
+                                <svg width="11" height="22" viewBox="0 0 11 22" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.5 1.5L9.5 11L1.5 20.5" stroke="#A6A6A6" stroke-width="2"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+
+                            </div>
+                        </div>
+                    </a>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="">
+                    이용 가능한 건물이 없습니다.
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

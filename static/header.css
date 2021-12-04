@@ -1,0 +1,21 @@
+.header {
+    width: 343px;
+    height: 28px;
+    margin: 0 16px;
+    padding: 16px 0;
+    position: fixed;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+.header .page-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 28px;
+}
+
+.header .cancle-btn, .header .spacer {
+    width: 25px;
+}

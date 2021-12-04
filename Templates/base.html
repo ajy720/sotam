@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>서강 탐색기, 서탐</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+</head>
+<body>
+<div id="root">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+</body>
+</html>
