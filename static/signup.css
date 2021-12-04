@@ -1,8 +1,23 @@
 .signup-page {
     padding: 0 20px;
+    position: relative;
+    z-index: 999;
+    margin: 20px 0;
 }
 
-h2{
+.background {
+    width: 100%;
+    padding-top: 70px;
+    height: 100%;
+    position: fixed;
+    background-image: url("/static/img/login_bg.png");
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+
+h2 {
+    color: black;
     margin-bottom: 8px;
 }
 
@@ -10,14 +25,20 @@ h2{
     margin-bottom: 20px;
 }
 
-.post-form p input{
+.loginContainer * {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.post-form p input {
     background-color: transparent;
+
 
 }
 
 .loginContainer input {
 
-    border: 2px solid #FFFFFF;
+    border: 2px solid #000;
     box-sizing: border-box;
     border-radius: 14px;
     width: 325px;
@@ -27,7 +48,7 @@ h2{
     outline: none;
 }
 
-.loginContainer div{
+.loginContainer div {
     margin-bottom: 8px;
 }
 
@@ -50,7 +71,7 @@ h2{
     cursor: pointer;
 }
 
-.fail-label{
+.fail-label {
     color: white;
     margin-bottom: 20px;
 }

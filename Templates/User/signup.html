@@ -4,6 +4,7 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static "signup.css" %}">
+    <div class="background"></div>
     <div class="signup-page">
         <h2 class="">회원가입</h2>
         <form action="{% url 'user:signup' %}" method="post" class="post-form">

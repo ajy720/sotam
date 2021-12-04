@@ -28,6 +28,9 @@
     </script>
     <link rel="stylesheet" href="{% static 'login.css' %}">
     <div class="login-page">
+        <div class="image-container">
+            <img src="{% static "img/sotam_red.png" %}" alt="">
+        </div>
         <form action="{% url 'user:login' %}" method="post" class="post-form">
             {% csrf_token %}
             <div class="loginContainer">
