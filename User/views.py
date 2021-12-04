@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from Review.models import Review
 from User.forms import UserForm
 
 
@@ -26,3 +27,18 @@ def signup(request):
         form = UserForm()
 
     return render(request, 'User/signup.html', {'form': form})
+
+
+def mypage(request):
+    if request.user.is_authenticated:
+        user = request.user
+        reviews = Review.objects.filter(author=user).order_by("-create_date")[:3]
+
+        context = {
+            "user": user,
+            "reviews": reviews
+        }
+
+        return render(request, "User/mypage.html", context=context)
+    else:
+        return redirect("user:login")

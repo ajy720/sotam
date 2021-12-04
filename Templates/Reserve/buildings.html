@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include "header.html" with to="user:mypage" title="건물 선택" %}
+    <link rel="stylesheet" href="{% static "Reserve/reserve_buildings.css" %}">
+    <div class="building-list-page">
+        <div class="building-list">
+            {% if buildings %}
+                {% for building in buildings %}
+                    <a class="building-item item" href="{% url 'reserve:facility_list' building.id %}">
+                        <div class="container2">
+                            <div class="spell">
+                                {{ building.spell }}
+                            </div>
+                            <div class="main">
+                                <div class="name">
+                                    {{ building.name }}
+                                </div>
+                                {% if building.status %}
+                                    <div class="time">
+                                        <div class="time">
+                                            {{ building.open_time }} ~ {{ building.close_time }}
+                                        </div>
+                                        <div class="status {{ building.status }}"></div>
+                                    </div>
+                                {% else %}
+                                    <div class="time">
+                                        <div class="time">
+                                            시간 정보 없음
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                            <div class="chevron">
+                                <svg width="11" height="22" viewBox="0 0 11 22" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.5 1.5L9.5 11L1.5 20.5" stroke="#A6A6A6" stroke-width="2"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+
+                            </div>
+                        </div>
+                    </a>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="">
+                    이용 가능한 건물이 없습니다.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

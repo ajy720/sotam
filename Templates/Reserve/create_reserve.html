@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static "Reserve/create_reserve.css" %}">
+    {% include 'headerWithArg.html' with to="reserve:facility_list" to_arg=facility.building.id title="예약 등록" %}
+    <div class="create-reserve-form page">
+        <script>
+            window.onload = () => {
+                let submitBtn = document.getElementById("submit-btn")
+
+                submitBtn.addEventListener("click", (e) => {
+                    {#e.preventDefault()#}
+                })
+            }
+        </script>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="inputContainer">
+                <div class="input-label">시작 시간</div>
+                <input name="start" type="datetime-local">
+            </div>
+            <div class="inputContainer">
+                <div class="input-label">종료 시간</div>
+                <input name="end" type="datetime-local">
+            </div>
+            {{ form.errors }}
+
+            <button type="submit" id="submit-btn" class="primary-btn">예약 등록</button>
+        </form>
+    </div>
+{% endblock %}

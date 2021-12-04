@@ -1,0 +1,21 @@
+
+.review-list .item .main {
+    padding: 0 8px;
+}
+
+.review-list .item .info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.review-list .item {
+    margin-bottom: 8px;
+}
+
+.item .main .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+

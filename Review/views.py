@@ -34,7 +34,7 @@ def create_review(request, building_id=None, facility_id=None):
                 return redirect("main:building_info", building_id)
 
             if facility_id:
-                return redirect("main:building_info", building_id)
+                return redirect("main:facility_info", facility_id)
 
         else:
             return HttpResponse(status=400)

@@ -1,32 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-    <div class="building-list">
-        {% if buildings %}
-            {% for building in buildings %}
-                <a class="building-item item" href="{% url 'main:building_info' building.id %}">
-                    <div class="container2">
+    {% include "header.html" with to="reserve:building_list" title="시설 선택" %}
+    <link rel="stylesheet" href="{% static "Reserve/reserve_facilities.css" %}">
+    <div class="facility-list-page">
+        <div class="facility-list">
+            {% if facilities %}
+                {% for facility in facilities %}
+                    <a class="facility-item item" href="{% url "reserve:create_reserve" facility.id %}">
+
                         <div class="spell">
                             {{ building.spell }}
                         </div>
                         <div class="main">
-                            <div class="name">
-                                {{ building.name }}
+                            <div class="label">
+                                {{ facility.name }} |
+                                {{ facility.location }}
                             </div>
-                            {% if building.status %}
+                            {% if facility.open_time %}
                                 <div class="time">
                                     <div class="time">
-                                        {{ building.open_time }} ~ {{ building.close_time }}
+                                        {{ facility.open_time }} ~ {{ facility.close_time }}
                                     </div>
-                                    <div class="status {{ building.status }}"></div>
+                                    <div class="status {{ facility.status }}"></div>
                                 </div>
                             {% else %}
                                 <div class="time">
                                     <div class="time">
                                         시간 정보 없음
                                     </div>
-                                    <div class="status"></div>
                                 </div>
                             {% endif %}
-
                         </div>
                         <div class="chevron">
                             <svg width="11" height="22" viewBox="0 0 11 22" fill="none"
@@ -36,14 +41,13 @@
                             </svg>
 
                         </div>
-                    </div>
-                </a>
-                </a>
-            {% endfor %}
-        {% else %}
-            <div class="">
-                이용 가능한 건물이 없습니다.
-            </div>
-        {% endif %}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="no-data">
+                    세부시설 정보가 없습니다.
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

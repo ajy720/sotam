@@ -1,0 +1,26 @@
+{% block content %}
+            <div class="star">
+                {% if star != -1 %}
+                    <span class="color-primary">★</span> {{ star|floatformat:2 }}
+                {% else %}
+                    별점 정보가 없습니다.
+                {% endif %}
+            </div>
+            <div class="time">
+                {% if open_time == '' %}
+                    {{ facility.open_time }} ~ {{ facility.close_time }}
+                {% else %}
+                    시간 정보가 없습니다.
+
+                {% endif %}
+            </div>
+            <div class="tags">
+                {% if tags %}
+                    {% for tag in tags %}
+                        <div class="tag">#{{ tag }}</div>
+                    {% endfor %}
+                {% else %}
+                    태그가 없습니다.
+                {% endif %}
+            </div>
+{% endblock %}

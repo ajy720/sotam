@@ -1,0 +1,64 @@
+{% block content %}
+    <div class="create-review">
+        {% if user.is_anonymous %}
+            <a href="{% url "user:login" %}?next={% url now obj_id %}" class="login-btn btn">로그인하고 리뷰 등록하기</a>
+        {% else %}
+            <div class="post-form">
+                <div class="main">
+                    <script>
+                        window.onload = () => {
+                            var stars = document.querySelectorAll(".star > label")
+                            var starCnt = 0;
+                            var submitBtn = document.querySelector("#submit-btn")
+                            var comment = document.querySelector("#comment")
+
+                            submitBtn.addEventListener("click", () => {
+                                $.post(
+                                    "{% url to obj_id %}",
+                                    {
+                                        stars: starCnt,
+                                        comment: comment.value
+                                    }
+                                ).then((e) => {
+                                    location.reload()
+                                }).catch((e) => {
+                                    alert("리뷰 등록 중 오류 발생")
+                                })
+                            })
+
+                            stars.forEach((e) => {
+                                console.log(e.firstChild)
+                                e.firstChild.addEventListener("click", (child) => {
+                                    starCnt = child.target.value
+                                    console.log(starCnt)
+                                    for (let i = 0; i < 5; i++) {
+                                        if (starCnt > i) {
+                                            stars[i].classList.add("color-primary")
+                                        } else {
+                                            stars[i].classList.remove("color-primary")
+                                        }
+                                    }
+                                })
+                            })
+                        }
+                    </script>
+                    <textarea id="comment" name="comment" rows="3" placeholder="리뷰를 작성해주세요."></textarea>
+                    <div class="star">
+                        <label for="star1"><input type="radio" name="star" id="star1" value="1"
+                                                  hidden>★</label>
+                        <label for="star2"><input type="radio" name="star" id="star2" value="2"
+                                                  hidden>★</label>
+                        <label for="star3"><input type="radio" name="star" id="star3" value="3"
+                                                  hidden>★</label>
+                        <label for="star4"><input type="radio" name="star" id="star4" value="4"
+                                                  hidden>★</label>
+                        <label for="star5"><input type="radio" name="star" id="star5" value="5"
+                                                  hidden>★</label>
+                    </div>
+                </div>
+                <button id="submit-btn" type="submit" class="btn">리뷰<br>등록</button>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

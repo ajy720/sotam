@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static "facility_info.css" %}">
+    {% include 'headerWithArg.html' with title=facility.building.spell title2="관" to='main:building_info' to_arg=facility.building.id %}
+    <div class="facility-info-page">
+        <div class="facility-header">
+            <h2>{{ facility.name }}({{ facility.building.spell }}관)</h2>
+            <div class="small info">{{ facility.location }}</div>
+            {% include "Main/info_header.html" %}
+        </div>
+        <div class="facility-body">
+            <div class="review-container container">
+                <div class="container-title">
+                    <h3>학생 리뷰</h3>
+                </div>
+                {% include "Review/review_create.html" with to="review:createFacilityReview" now="main:facility_info" obj_id=facility.id %}
+                {% include "Review/review_list.html" %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static "review_list.css" %}">
+    <div class="review-list">
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review-item item">
+                    <div class="main">
+                        <div class="info">
+                            <div class="label">
+                                {{ review.author.username }} |
+                                <span class="color-primary">★</span> {{ review.stars }}
+                            </div>
+                            <div class="star">
+                                {{ review.create_date|date:"y-m-d H:i" }}
+                            </div>
+                        </div>
+                        <div>
+                            {{ review.comment }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-data">
+                리뷰가 없습니다.
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

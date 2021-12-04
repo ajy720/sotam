@@ -7,32 +7,7 @@
         <div class="building-header">
             <h2>{{ building.name }}({{ building.spell }}관)</h2>
             <div class="small info">{{ building.location }}</div>
-            <div class="star">
-
-                {% if star != -1 %}
-                    <span class="color-primary">★</span> {{ star }}
-                {% else %}
-                    별점 정보가 없습니다.
-
-                {% endif %}
-            </div>
-            <div class="time">
-                {% if open_time == '' %}
-                    {{ building.open_time }} ~ {{ building.close_time }}
-                {% else %}
-                    시간 정보가 없습니다.
-
-                {% endif %}
-            </div>
-            <div class="tags">
-                {% if tags %}
-                    {% for tag in tags %}
-                        <div class="tag">#{{ tag }}</div>
-                    {% endfor %}
-                {% else %}
-                    태그가 없습니다.
-                {% endif %}
-            </div>
+            {% include "Main/info_header.html" %}
         </div>
         <div class="building-body">
             <div class="facility-container container">
@@ -40,7 +15,7 @@
                 <div class="facility-list">
                     {% if facilities %}
                         {% for facility in facilities %}
-                            <a class="facility-item item" href="">
+                            <a class="facility-item item" href="{% url "main:facility_info" facility.id %}">
                                 <div class="main">
                                     <div class="label">
                                         {{ facility.name }} |
@@ -48,7 +23,7 @@
                                     </div>
                                     <div class="star">
                                         <span class="color-primary">★</span>
-                                        3.5
+                                        {{ facility.star }}
                                     </div>
                                 </div>
                                 <div class="chevron">
@@ -72,99 +47,8 @@
                 <div class="container-title">
                     <h3>학생 리뷰</h3>
                 </div>
-                <div class="create-review">
-                    {% if user.is_anonymous %}
-                        <a href="{% url "user:login" %}" class="login-btn btn">로그인하고 리뷰 등록하기</a>
-                    {% else %}
-                        <div class="post-form">
-                            <div class="main">
-                                <script>
-                                    window.onload = () => {
-                                        var stars = document.querySelectorAll(".star > label")
-                                        var starCnt = 0;
-                                        var submitBtn = document.querySelector("#submit-btn")
-                                        var comment = document.querySelector("#comment")
-
-                                        submitBtn.addEventListener("click", () => {
-                                            $.post(
-                                                "{% url "review:createBuildingReview" building.id%}",
-                                                {
-                                                    stars: starCnt,
-                                                    comment: comment.value
-                                                }
-                                            ).then((e) => {
-                                                location.reload()
-                                            }).catch((e) => {
-                                                alert("리뷰 등록 중 오류 발생")
-                                            })
-                                        })
-
-                                        stars.forEach((e) => {
-                                            console.log(e.firstChild)
-                                            e.firstChild.addEventListener("click", (child) => {
-                                                starCnt = child.target.value
-                                                console.log(starCnt)
-                                                for (let i = 0; i < 5; i++) {
-                                                    if (starCnt > i) {
-                                                        stars[i].classList.add("color-primary")
-                                                    } else {
-                                                        stars[i].classList.remove("color-primary")
-                                                    }
-                                                }
-                                            })
-                                        })
-                                    }
-                                </script>
-                                <textarea id="comment" name="comment" rows="3" placeholder="리뷰를 작성해주세요."></textarea>
-                                <div class="star">
-                                    <label for="star1"><input type="radio" name="star" id="star1" value="1"
-                                                              hidden>★</label>
-                                    <label for="star2"><input type="radio" name="star" id="star2" value="2"
-                                                              hidden>★</label>
-                                    <label for="star3"><input type="radio" name="star" id="star3" value="3"
-                                                              hidden>★</label>
-                                    <label for="star4"><input type="radio" name="star" id="star4" value="4"
-                                                              hidden>★</label>
-                                    <label for="star5"><input type="radio" name="star" id="star5" value="5"
-                                                              hidden>★</label>
-                                </div>
-                            </div>
-                            <button id="submit-btn" type="submit" class="btn">리뷰<br>등록</button>
-                        </div>
-                    {% endif %}
-
-                    {#                    {% if not user.is_anonymous %}#}
-                    {#                        <a href="{% url "review:createBuildingReview" building.id %}" class="review-btn">리뷰 작성하기</a>#}
-                    {#                    {% else %}#}
-                    {#                        <a href="{% url "user:login" %}" class="review-btn">로그인하고 리뷰 작성하기</a>#}
-                    {#                    {% endif %}#}
-                </div>
-                <div class="review-list">
-                    {% if reviews %}
-                        {% for review in reviews %}
-                            <div class="review-item item">
-                                <div class="main">
-                                    <div class="info">
-                                        <div class="label">
-                                            {{ review.author.username }} |
-                                            <span class="color-primary">★</span> {{ review.stars }}
-                                        </div>
-                                        <div class="star">
-                                            {{ review.create_date|date:"y-m-d H:i" }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        {{ review.comment }}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="no-data">
-                            리뷰가 없습니다.
-                        </div>
-                    {% endif %}
-                </div>
+                {% include "Review/review_create.html" with to="review:createBuildingReview" now="main:building_info" obj_id=building.id %}
+                {% include "Review/review_list.html" %}
             </div>
         </div>
 
