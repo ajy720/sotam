@@ -17,7 +17,7 @@ html, body {
 }
 
 .color-primary {
-    color: #fa4545;
+    color: #fa4545 !important;
 }
 
 #root {
@@ -31,4 +31,12 @@ html, body {
 
 .strong {
     font-weight: 600;
+}
+
+.small{
+    font-size: 12px;
+}
+
+.info{
+    color: #a1a1a1;
 }

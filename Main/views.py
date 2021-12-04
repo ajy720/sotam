@@ -50,7 +50,7 @@ def building_info(request, building_id):
     building = Building.objects.get(id=building_id)
     facilities = Facility.objects.filter(building=building)
 
-    reviews = Review.objects.filter(building_id=building_id, facility__exact=False)
+    reviews = Review.objects.filter(building_id=building_id, facility__isnull=True).order_by("-create_date")
 
     tags = list(
         TagOnReview.objects.filter(review__building=building_id).values("tag").
@@ -60,8 +60,6 @@ def building_info(request, building_id):
     tags.sort(key=lambda x: x["count"], reverse=True)
 
     tags = list(map(lambda x: x["tag"], tags[:5]))
-
-
 
     if reviews:
         star = sum(reviews.values_list("stars", flat=True)) / reviews.count()

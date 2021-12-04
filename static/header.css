@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid white;
+    background-color: #4c4c4c;
 }
 
 .header .page-title {
