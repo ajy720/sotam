@@ -11,7 +11,11 @@
         </div>
         <div class="building-body">
             <div class="facility-container container">
-                <h3 class="container-title">세부 시설</h3>
+
+                <div class="container-title">
+                    <h3>세부 시설</h3>
+                    <a class="primary-btn" href="{% url "reserve:facility_list" building.id %}">시설 예약하기</a>
+                </div>
                 <div class="facility-list">
                     {% if facilities %}
                         {% for facility in facilities %}

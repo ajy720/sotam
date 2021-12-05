@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'Reserve/reserve_list.css' %}">
+    {% include 'headerWithArg.html' with to="reserve:facility_list" to_arg=facility.building.id title="예약 리스트" %}
+
+    <script>
+        window.onload = () => {
+            let submitBtn = document.getElementById("submit")
+            let reserves = document.querySelectorAll("input[type='radio']")
+            let res
+
+            reserves.forEach((e) => {
+                e.addEventListener("click", (ev) => {
+                    console.log(ev.target.value)
+
+                    reserves.forEach((el) => {
+                        el.parentElement.classList.remove("selected")
+                    })
+
+                    ev.target.parentElement.classList.add("selected")
+
+                    res = ev.target.value
+                })
+            })
+
+            submitBtn.addEventListener("click", (e) => {
+                if (res === undefined) {
+                    alert("예약을 선택하세요.")
+                    return
+                }
+
+                $.post(
+                    '{% url "reserve:reserve" %}', {
+                        "reserve": res
+                    }
+                ).then((e) => {
+                    alert("예약에 성공했습니다.")
+                    location.href = '{% url "main:building_info" facility.building.id %}'
+                }).catch((e) => {
+                    alert("예약에 실패했습니다..")
+                })
+            })
+        }
+    </script>
+    <div class="page reserve-list-page">
+        <div class="reserve-list">
+            {% if reserves %}
+                {% for reserve in reserves %}
+                    <label for="res{{ reserve.id }}">
+                        <div class="item">
+                            <input hidden type="radio" id="res{{ reserve.id }}" name="reserve" value="{{ reserve.id }}">
+                            {{ reserve.start|date:"Y-m-d H:i" }} ~ {{ reserve.end|date:"Y-m-d H:i" }}
+                        </div>
+                    </label>
+                {% endfor %}
+                <div id="submit" class="primary-btn">예약하기</div>
+            {% else %}
+                예약이 다 찼습니다.
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

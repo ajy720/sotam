@@ -10,4 +10,4 @@ class ReserveAdmin(admin.ModelAdmin):
                     "start",
                     "end",
                     "admin",
-                    "user")
+                    "user",)

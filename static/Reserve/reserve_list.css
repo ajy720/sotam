@@ -1,0 +1,20 @@
+.reserve-list {
+    text-align: center;
+    margin-top: 76px;
+}
+
+.reserve-list .item {
+    background-color: white;
+    width: 100%;
+    color: black;
+    border-radius: 16px;
+    margin-bottom: 8px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.item.selected {
+    background-color: #fa4545;
+    color: white;
+
+}
