@@ -29,6 +29,10 @@
     width: 100%;
 }
 
+.alert * {
+    color: #fa4545;
+}
+
 .post-form {
     width: 100%;
     display: flex;
