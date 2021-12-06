@@ -33,6 +33,11 @@
     color: #fa4545;
 }
 
+.alert {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
 .post-form {
     width: 100%;
     display: flex;
