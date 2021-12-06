@@ -7,7 +7,7 @@
         <div class="building-header">
             <h2>{{ building.name }}({{ building.spell }}관)</h2>
             <div class="small info">{{ building.location }}</div>
-            {% include "Main/info_header.html" %}
+            {% include "Main/info_header.html" with obj=building %}
         </div>
         <div class="building-body">
             <div class="facility-container container">

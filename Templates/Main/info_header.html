@@ -7,8 +7,8 @@
                 {% endif %}
             </div>
             <div class="time">
-                {% if open_time == '' %}
-                    {{ facility.open_time }} ~ {{ facility.close_time }}
+                {% if obj.open_time %}
+                    {{ obj.open_time }} ~ {{ obj.close_time }}
                 {% else %}
                     시간 정보가 없습니다.
 
